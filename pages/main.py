@@ -12,8 +12,8 @@ with open(file_path, 'rb') as model_file:
 data_load_state.text("Done! (using st.cache)")
 
 @st.cache
-def predictions(work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_care, cost_of_commConnector):
-    input_data = [[work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_care, cost_of_commConnector]]
+def predictions(work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_commConnector):
+    input_data = [[work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_commConnector]]
     predictions = model.predict(input_data)
     return predictions[0]
 
@@ -38,12 +38,12 @@ def main():
         Age = float(Age)
         charge_per_hour = float(charge_per_hour)
         Average_Time_Spent = float(Average_Time_Spent)
-        cost_of_care = float(cost_of_care)
+        # cost_of_care = float(cost_of_care)
         cost_of_commConnector = float(Community_Connector_charges)
 
         result = ""
         if st.button("Predictions"):
-            result = predictions(work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_care, cost_of_commConnector)
+            result = predictions(work_days, Age, charge_per_hour, Average_Time_Spent, cost_of_commConnector)
         st.success("The output is: {:.2f}".format(result))
     except ValueError:
         st.error("Please enter valid numeric values.")
