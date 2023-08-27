@@ -7,8 +7,8 @@ script_path = os.path.abspath(os.path.dirname(__file__))
 file_path = os.path.join(script_path, 'conn_cost-model.pk1')
 
 data_load_state = st.text('Loading model...')
-pickle_in = open("pages/", 'rb')
-model = pickle.load(pickle_in)
+with open(file_path, 'rb') as model_file:
+    model = pickle.load(model_file)
 data_load_state.text("Done! (using st.cache)")
 
 @st.cache
