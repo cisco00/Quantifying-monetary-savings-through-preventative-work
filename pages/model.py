@@ -52,7 +52,7 @@ def main():
     n_estimators = st.sidebar.slider("Number of Estimators", 1, 100, 10)
     test_size = st.sidebar.slider("Test Size", 0.1, 0.5, 0.3, 0.05)
 
-    X, y = load_data(f"{file_path}/{datasets_name.lower().replace(' ', '_')}_data.csv", target_col_name)
+    X, y = load_data(f"pages/{datasets_name.lower().replace(' ', '_')}_data.csv", target_col_name)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size)
 
     model = train_model(X_train, y_train, model_type, n_estimators)
