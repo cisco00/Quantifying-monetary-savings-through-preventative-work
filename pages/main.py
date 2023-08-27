@@ -1,8 +1,13 @@
 import streamlit as st
 import pickle
+import os
+
+
+script_path = os.path.abspath(os.path.dirname(__file__))
+file_path = os.path.join(script_path, 'conn_cost-model.pk1')
 
 data_load_state = st.text('Loading model...')
-pickle_in = open("/home/oem/machine_learning/pages/conn_cost-model.pk1", 'rb')
+pickle_in = open("pages/", 'rb')
 model = pickle.load(pickle_in)
 data_load_state.text("Done! (using st.cache)")
 
