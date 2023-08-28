@@ -74,7 +74,7 @@ def main():
         result = model.predict(input_data)
         
         st.subheader("Prediction Result")
-        st.write(f"The estimated cost of care is £: {result[0]:.2f}")
+        st.write(f"The estimated cost of care is £ {result[0]:.2f}")
         
         y_pred = model.predict(X_test)
         score = r2_score(y_test, y_pred) * 100
