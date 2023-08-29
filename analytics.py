@@ -46,8 +46,12 @@ df1 = pd.read_csv('processed_data.csv')
 df1 = df1.drop(columns=['Preferred Language for Communication', 'Cluster Area'], axis =1)
 data_load_state.text("Done! (using st.cache)")
 
+ata_load_state = st.text('Statistical Summary Analysis...')
+df1.describe().T
+data_load_state.text("Done! (using st.cache)")
+
 st.subheader("Processed Data")
-st.write(df1)
+# st.write(df1)
 
 df1 = df1.fillna(0)
 df1 = df1.assign(cost_of_care=pd.Series(df1['charges per hour £'] * df1['Working_Days'] * df1['Average Time Spent']))
@@ -76,3 +80,20 @@ plt.xlabel('Individual Visited/Joint Visited with Professionals')
 plt.ylabel('Average Cost of Care £')
 plt.xticks(rotation=45)
 st.pyplot(fig2)  # Display the Seaborn plot in Streamlit
+
+st.subheader('Cost Analysis for Cost of Care by Town/City (Non-Zero')
+df1_grouped = df1.groupby('Town/City')['cost_of_care'].agg(['sum', 'mean', 'min']).reset_index()
+df1_grouped_filtered = df1_grouped[df1_grouped['Town/City'] != 0]
+# Set custom palette colors
+custom_palette = sns.color_palette(['#1f77b4', '#ff7f0e', '#2ca02c'])
+# Plotting using Seaborn
+fig3, ax3 = plt.subplots(figsize=(10, 6))
+sns.barplot(data=df1_grouped_filtered, x='Town/City', y='sum', color=custom_palette[0], label='Total Cost')
+sns.barplot(data=df1_grouped_filtered, x='Town/City', y='mean', color=custom_palette[1], label='Average Cost')
+sns.barplot(data=df1_grouped_filtered, x='Town/City', y='min', color=custom_palette[2], label='Minimum Cost')
+plt.title('Cost Analysis for Cost of Care by Town/City (Non-Zero)')
+plt.xlabel('Town/City')
+plt.ylabel('Cost £')
+plt.xticks(rotation=45)
+plt.legend()
+st.pyplot(fig3)
