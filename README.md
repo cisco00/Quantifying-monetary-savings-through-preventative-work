@@ -1,0 +1,1 @@
+This project aims to develop an end-to-end solution for predicting cost-effective social services using Python, machine learning models, and the Streamlit framework for creating interactive web applications. The solution will involve data collection, preprocessing, model training, evaluation, and deployment of the model using Streamlit.
